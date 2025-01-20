@@ -40,7 +40,34 @@ function randomRadio(){
     radios[randomIndex].checked = true;
     console.log(`"${radios[randomIndex].value}" がランダムに選択されました。`);
 
+    saveRadiosData(radios);
+
     return;
+}
+
+// 性別のデータを保存する
+function saveRadiosData(radios) {
+    let dataToSave = {
+        radios: [],
+        selectedValue: null
+    }
+
+    // ラジオボタンから情報を収集
+    radios.forEach(radio => {
+        dataToSave.radios.push({
+            id: radio.id || null,
+            value: radio.value || null,
+            checked: radio.checked
+        });
+        if (radio.checked) {
+            dataToSave.selectedValue = radio.value;
+        }
+    });
+
+    // ストレージに保存
+    chrome.storage.local.set({ genderData: dataToSave }, function() {
+        console.log('Gender data has been saved:', dataToSave);
+    });
 }
 
 // ドロップダウンをランダム入力する関数
@@ -65,7 +92,35 @@ function randomDropdown(){
     // 選択されたオプションのテキストを表示
     console.log(`"${options[randomIndex].text}" がランダムに選択されました。`);
 
+    saveDropdownData(dropdown);
+
     return;
+}
+
+// 性別のデータを保存する
+function saveDropdownData(dropdown) {
+    let dataToSave = {
+        dropdown: null,
+        selectedValue: null
+    }
+
+    // ドロップダウンの情報を収集
+    if (dropdown) {
+        const options = Array.from(dropdown.options).map(option => ({
+            value: option.value,
+            text: option.innerText,
+            selected: option.selected
+        }));
+        dataToSave.dropdown = options;
+        if (dropdown.selectedIndex !== -1) {
+            dataToSave.selectedValue = dropdown.options[dropdown.selectedIndex].value;
+        }
+    }
+
+    // ストレージに保存
+    chrome.storage.local.set({ genderData: dataToSave }, function() {
+        console.log('Gender data has been saved:', dataToSave);
+    });
 }
 
 // テキストインプットに規定入力を入力する関数
@@ -84,4 +139,31 @@ function fillTextInput(){
 
     // 確認のため、コンソールに設定された値を表示
     console.log(`"${textInput.value}" が入力されました。`);
+
+    saveTextInputData(textInput);
+
+    return;
+}
+
+// 性別のデータを保存する
+function saveTextInputData(textInput) {
+    let dataToSave = {
+        textInput: null,
+        selectedValue: null
+    }
+
+    // ドロップダウンの情報を収集
+    if (textInput) {
+        dataToSave.textInput = {
+            value: textInput.value
+        };
+        if (textInput.value) {
+            dataToSave.selectedValue = textInput.value;
+        }
+    }
+
+    // ストレージに保存
+    chrome.storage.local.set({ genderData: dataToSave }, function() {
+        console.log('Gender data has been saved:', dataToSave);
+    });
 }
