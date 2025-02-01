@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保存データを確認</title>
+    <style>
+        body { font-family: Arial, sans-serif; width: 350px; padding: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 8px; text-align: left; border: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
+        button { margin-top: 10px; padding: 5px 10px; }
+    </style>
+</head>
+<body>
+    <h2>保存データ</h2>
+    
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>URL</th>
+                <th>入力タイプ</th>
+                <th>選ばれた値</th>
+            </tr>
+        </thead>
+        <tbody id="dataOutput">
+            <tr>
+                <td colspan="3">データを読み込み中...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button id="clearData">データを削除</button>
+
+    <script src="popup.js"></script>
+</body>
+</html>

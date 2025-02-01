@@ -3,7 +3,11 @@
     "name": "性別入力",
     "version": "1.0",
     "description": "性別欄を勝手に入力する拡張機能です",
-    "permissions": ["tabs", "scripting"],
+    "permissions": ["tabs", "scripting", "storage"],
+    "action": {
+      "default_popup": "popup.html",
+      "default_title": "保存データを確認"
+    },
     "background": {
       "service_worker": "background.js"
     },
