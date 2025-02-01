@@ -3,11 +3,24 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === 'complete') {
         console.log("ページにアクセスしました:", tab.url);
         
+        // ページ読み込み時にランダム入力を実行
         chrome.scripting.executeScript({
             target: { tabId: tabId },
-            files: ["content_script.js"]
+            func: function() {
+                randomInputs();
+            }
         }).catch(err => {
             console.error("スクリプト実行エラー:", err);
+        });
+
+        // フォーム送信時にデータを保存する処理もスクリプト内で行う
+        chrome.scripting.executeScript({
+            target: { tabId: tabId },
+            func: function() {
+                addSubmitListener();
+            }
+        }).catch(err => {
+            console.error("フォーム送信イベント設定エラー:", err);
         });
     }
 });
