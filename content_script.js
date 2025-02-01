@@ -10,37 +10,17 @@ if (typeof window.VALUE_TO_TEXT === 'undefined') {
     console.log("VALUE_TO_TEXTを初期化しました:", VALUE_TO_TEXT);
 }
 
-/* 関数呼び出し */
-randomRadio();
-randomDropdown();
-fillTextInput();
-
 /* 関数の定義 */
-// データを保存する関数
-function saveToStrage(dataToSave) {
-    chrome.storage.local.get(['genderData'], function(result) {
-        let genderData = result.genderData || [];  // もしデータがなければ空配列
-
-        // 新しいデータを追加
-        genderData.push(dataToSave);
-
-        // ストレージに保存
-        chrome.storage.local.set({ genderData: genderData }, function() {
-            console.log('Gender data has been saved:', dataToSave);
-        });
-    });
+// ランダム入力を行う関数
+function randomInputs() {
+    randomRadio();
+    randomDropdown();
+    fillTextInput();
 }
 
 // ラジオボタンをランダム入力する関数
 function randomRadio(){
-    let dataToSave = {
-        url: window.location.href,
-        radios: null,
-        dropdowns: null,
-        textInputs: null,
-        selectedValue: null
-    };
-
+    // ラジオボタンを探す
     const radioSelector = KEY_WORDS.map(name => `input[type="radio"][name*="${name}"]`).join(', ');
     const radios = document.querySelectorAll(radioSelector);
 
@@ -63,30 +43,11 @@ function randomRadio(){
     radios[randomIndex].checked = true;
     console.log(`"${radios[randomIndex].value}" がランダムに選択されました。`);
 
-    // ラジオボタンのデータを収集
-    dataToSave.radios = Array.from(radios).map(radio => ({
-        id: radio.id || null,
-        value: radio.value,
-        checked: radio.checked
-    }));
-
-    dataToSave.selectedValue = radios[randomIndex].value;
-
-    saveToStrage(dataToSave);
-
     return;
 }
 
 // ドロップダウンをランダム入力する関数
 function randomDropdown(){
-    let dataToSave = {
-        url: window.location.href,
-        radios: null,
-        dropdowns: null,
-        textInputs: null,
-        selectedValue: null
-    };
-
     // dropdownを探す
     const dropdownSelector = KEY_WORDS.map(name => `select[name*="${name}"]`).join(', ');
     const dropdowns = document.querySelectorAll(dropdownSelector);
@@ -102,35 +63,15 @@ function randomDropdown(){
         const options = dropdown.options;
         const randomIndex = Math.floor(Math.random() * options.length);
         dropdown.selectedIndex = randomIndex;
-        dataToSave.selectedValue = options[randomIndex].text
         console.log(`"${options[randomIndex].text}" がランダムに選択されました。`);
     });
-
-    // ドロップダウンのデータを収集
-    dataToSave.dropdowns = Array.from(dropdowns).map(dropdown => ({
-        options: Array.from(dropdown.options).map(option => ({
-            value: option.value,
-            text: option.innerText,
-            selected: option.selected
-        }))
-    }));
-
-    saveToStrage(dataToSave);
 
     return;
 }
 
 // テキストインプットに規定入力を入力する関数
 function fillTextInput(){
-    let dataToSave = {
-        url: window.location.href,
-        radios: null,
-        dropdowns: null,
-        textInputs: null,
-        selectedValue: null
-    };
-
-    // テキストインプット要素を取得
+    // テキストインプットを探す
     const textInputSelector = KEY_WORDS.map(name => `input[type="text"][name*="${name}"]`).join(', ');
     const textInputs = document.querySelectorAll(textInputSelector);
 
@@ -144,15 +85,98 @@ function fillTextInput(){
     textInputs.forEach(textInput => {
         textInput.value = VALUE_TO_TEXT;
         console.log(`"${textInput.value}" が入力されました。`);
-        dataToSave.selectedValue = textInput.value
     });
 
-    // テキストインプットのデータを収集
-    dataToSave.textInputs = Array.from(textInputs).map(textInput => ({
-        value: textInput.value
-    }));
+    return;
+}
+
+// フォーム送信時にデータを保存する関数
+function addSubmitListener() {
+    document.addEventListener("submit", function(event) {
+        if (event.target && event.target.tagName === "FORM") {
+            saveFormData(event.target);  // フォーム送信時にデータを保存
+        }
+    }, true);
+}
+
+// データを保存する関数
+function saveFormData(form) {
+    let dataToSave = {
+        url: window.location.href,
+        radios: null,
+        dropdowns: null,
+        textInputs: null,
+        selectedValue: null
+    };
+
+    // ラジオボタンを探す
+    const radioSelector = KEY_WORDS.map(name => `input[type="radio"][name*="${name}"]`).join(', ');
+    const radios = document.querySelectorAll(radioSelector);
+
+    // ラジオボタンの情報を得る
+    if (radios.length > 0) {
+        radios.forEach(radio => {
+            if (radio.checked) {
+                dataToSave.selectedValue = radio.value;
+            }
+        });
+
+        dataToSave.radios = Array.from(radios).map(radio => ({
+            id: radio.id || null,
+            value: radio.value,
+            checked: radio.checked
+        }));
+    }
+
+    // dropdownを探す
+    const dropdownSelector = KEY_WORDS.map(name => `select[name*="${name}"]`).join(', ');
+    const dropdowns = document.querySelectorAll(dropdownSelector);
+
+    // ドロップダウンの情報を得る
+    if (dropdowns.length > 0) {
+        dropdowns.forEach(dropdown => {
+            const options = dropdown.options;
+            const selectedOption = options[dropdown.selectedIndex];
+            dataToSave.selectedValue = selectedOption ? selectedOption.text : null;
+        });
+
+        dataToSave.dropdowns = Array.from(dropdowns).map(dropdown => ({
+            options: Array.from(dropdown.options).map(option => ({
+                value: option.value,
+                text: option.innerText,
+                selected: option.selected
+            }))
+        }));
+    }
+
+    // テキストインプットを探す
+    const textInputSelector = KEY_WORDS.map(name => `input[type="text"][name*="${name}"]`).join(', ');
+    const textInputs = document.querySelectorAll(textInputSelector);
+
+    // テキストインプットの情報を得る
+    if (textInputs.length > 0) {
+        textInputs.forEach(textInput => {
+            dataToSave.selectedValue = textInput.value;
+        });
+
+        dataToSave.textInputs = Array.from(textInputs).map(textInput => ({
+            value: textInput.value
+        }));
+    }
 
     saveToStrage(dataToSave);
+}
 
-    return;
+function saveToStrage(dataToSave) {
+    chrome.storage.local.get(['genderData'], function(result) {
+        let genderData = result.genderData || [];  // もしデータがなければ空配列
+
+        // 新しいデータを追加
+        genderData.push(dataToSave);
+
+        // ストレージに保存
+        chrome.storage.local.set({ genderData: genderData }, function() {
+            console.log('Gender data has been saved:', dataToSave);
+        });
+    });
 }
