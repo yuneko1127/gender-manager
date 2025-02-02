@@ -90,7 +90,7 @@ function fillTextInput(){
     return;
 }
 
-// フォーム送信時にデータを保存する関数
+// フォーム送信時のイベントを監視し、データ保存関数を呼び出す関数
 function addSubmitListener() {
     document.addEventListener("submit", function(event) {
         if (event.target && event.target.tagName === "FORM") {
@@ -99,7 +99,7 @@ function addSubmitListener() {
     }, true);
 }
 
-// データを保存する関数
+// 保存するデータを探し、保存関数を呼び出す関数
 function saveFormData(form) {
     let dataToSave = {
         url: window.location.href,
@@ -169,9 +169,11 @@ function saveFormData(form) {
     }
 }
 
+// 実際にデータをストレージに保存する関数
 function saveToStrage(dataToSave) {
     chrome.storage.local.get(['genderData'], function(result) {
-        let genderData = result.genderData || [];  // もしデータがなければ空配列
+        // 以前のデータを取得
+        let genderData = result.genderData || [];
 
         // 新しいデータを追加
         genderData.push(dataToSave);
