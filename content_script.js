@@ -164,7 +164,9 @@ function saveFormData(form) {
         }));
     }
 
-    saveToStrage(dataToSave);
+    if(radios.length > 0 || dropdowns.length > 0 || textInputs.length > 0) {
+        saveToStrage(dataToSave);
+    }
 }
 
 function saveToStrage(dataToSave) {
