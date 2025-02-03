@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Error:", chrome.runtime.lastError);
             dataOutput.innerHTML = "<tr><td colspan='3'>データの取得に失敗しました。</td></tr>";
         } else {
+            let dataCount = 0;
             if (result.genderData && result.genderData.length > 0) {
                 dataCount = result.genderData.length;
                 // テーブルの行を動的に作成
