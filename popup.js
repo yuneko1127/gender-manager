@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const dataOutput = document.getElementById("dataOutput");
+    const dataCountElement = document.getElementById("dataCount");
     const clearButton = document.getElementById("clearData");
 
     // 保存されたデータを取得
@@ -9,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
             dataOutput.innerHTML = "<tr><td colspan='3'>データの取得に失敗しました。</td></tr>";
         } else {
             if (result.genderData && result.genderData.length > 0) {
+                dataCount = result.genderData.length;
                 // テーブルの行を動的に作成
                 let rows = "";
                 result.genderData.forEach(data => {
@@ -29,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
             } else {
                 dataOutput.innerHTML = "<tr><td colspan='3'>データがありません。</td></tr>";
             }
+            dataCountElement.textContent = `出会った性別欄の数: ${dataCount}`;
         }
     });
 
