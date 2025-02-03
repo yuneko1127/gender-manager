@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "性別入力",
+    "name": "性別マネージャー",
     "version": "1.0",
-    "description": "性別欄を勝手に入力する拡張機能です",
+    "description": "Web上にある性別に関する入力を勝手に入力する拡張機能です。",
     "permissions": ["tabs", "scripting", "storage"],
     "action": {
       "default_popup": "popup.html",
