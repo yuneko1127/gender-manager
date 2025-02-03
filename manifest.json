@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "性別マネージャー",
     "version": "1.0",
-    "description": "Web上にある性別に関する入力を勝手に入力する拡張機能です。",
+    "description": "Web上にある性別に関する入力を自動で入力する拡張機能です。",
     "permissions": ["tabs", "scripting", "storage"],
     "action": {
       "default_popup": "popup.html",
@@ -14,7 +14,11 @@
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
-        "js": ["content_script.js"]
+        "js": ["scripts/content_script.js"]
+      },
+      {
+        "matches": ["https://docs.google.com/forms/*"],
+        "js": ["scripts/googleform.js"]
       }
     ],
     "host_permissions": [
