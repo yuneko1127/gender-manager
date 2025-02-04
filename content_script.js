@@ -29,19 +29,28 @@ function randomRadio(){
         console.log('性別のラジオボタンはありませんでした');
         return;
     }
-    
-    // 選択されているボタンを解除
+
+    const reqioredRadios = [];
     radios.forEach(radio => {
+        if (radio.required) {
+            reqioredRadios.push(radio);
+        }
+    });
+
+    // 選択されているボタンを解除
+    reqioredRadios.forEach(radio => {
         if (radio.checked) {
             radio.checked = false;
         }
     });
 
     // ランダムに1つ選択
-    const randomIndex = Math.floor(Math.random() * radios.length);
-    console.log(randomIndex);
-    radios[randomIndex].checked = true;
-    console.log(`"${radios[randomIndex].value}" がランダムに選択されました。`);
+    if(reqioredRadios.length > 0) {
+        const randomIndex = Math.floor(Math.random() * reqioredRadios.length);
+        console.log(randomIndex);
+        reqioredRadios[randomIndex].checked = true;
+        console.log(`"${reqioredRadios[randomIndex].value}" がランダムに選択されました。`);
+    }
 
     return;
 }
@@ -58,8 +67,15 @@ function randomDropdown(){
         return;
     }
 
-    // ランダムに1つ選択
+    const requiredDropdowns = [];
     dropdowns.forEach(dropdown => {
+        if (dropdown.required) {
+            requiredDropdowns.push(dropdown);
+        }
+    });
+
+    // ランダムに1つ選択
+    requiredDropdowns.forEach(dropdown => {
         const options = dropdown.options;
         const randomIndex = Math.floor(Math.random() * options.length);
         dropdown.selectedIndex = randomIndex;
@@ -81,8 +97,15 @@ function fillTextInput(){
         return;
     }
 
-    // テキストインプットに指定された値を設定
+    const requiredTextInputs = [];
     textInputs.forEach(textInput => {
+        if (textInput.required) {
+            requiredTextInputs.push(textInput); 
+        }
+    });
+
+    // テキストインプットに指定された値を設定
+    requiredTextInputs.forEach(textInput => {
         textInput.value = VALUE_TO_TEXT;
         console.log(`"${textInput.value}" が入力されました。`);
     });
