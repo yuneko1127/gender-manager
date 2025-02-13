@@ -7,9 +7,10 @@ Chrome ウェブストアでも[性別マネージャー](https://chromewebstore
 もっとも手軽な方法は、Chrome ウェブストアに公開されている[性別マネージャー](https://chromewebstore.google.com/detail/%E6%80%A7%E5%88%A5%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC/kofifkdfnmaaolbcpijnmpihdboaeejm)を追加する方法です。
 
 これ以降は、Webストアへ更新されていない機能を利用したいときの手順です。
+「store」ブランチが現在Chrome ウェブストアに公開しているものと同じ機能のものです。
 
 ### 改変しないで使う
-1. このリポジトリのコードをダウンロードする。一番手軽なのは**Download Zip**です。![DawnloadZip](src/downloadZip.png)
+1. このリポジトリをダウンロードする。一番手軽なのは**Download Zip**です。特定のブランチをダウンロードしたいときは、そこに移動してからDownload Zipをする。![DawnloadZip](src/downloadZip.png)
 1. Chrome拡張機能のページ[chrome://extensions/](chrome://extensions/)にアクセス
 1. 左上のパッケージ化されていない拡張機能を読み込むから、フォルダを選択。
 
