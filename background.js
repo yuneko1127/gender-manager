@@ -1,7 +1,6 @@
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     // ページが完全に読み込まれた時に、すべてのURLで実行
     if (changeInfo.status === 'complete') {
-        console.log("ページにアクセスしました:", tab.url);
         
         // ページ読み込み時にランダム入力を実行
         chrome.scripting.executeScript({

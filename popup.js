@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function() {
     clearButton.addEventListener("click", function() {
         chrome.storage.local.remove(["genderData"], function() {
             dataOutput.innerHTML = "<tr><td colspan='3'>データが削除されました。</td></tr>";
-            console.log("Gender data has been removed.");
         });
     });
 });

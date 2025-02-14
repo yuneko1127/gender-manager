@@ -2,12 +2,10 @@
 if (typeof window.KEY_WORDS === 'undefined') {
     // 探してほしい入力欄のキーワードを追加
     window.KEY_WORDS = ["gender", "sex", "seibetsu", "seibetu"];
-    console.log("KEY_WORDSを初期化しました:", KEY_WORDS);
 }
 if (typeof window.VALUE_TO_TEXT === 'undefined') {
     // テキストインプットのときに入力する値を定義
     window.VALUE_TO_TEXT = "無回答";
-    console.log("VALUE_TO_TEXTを初期化しました:", VALUE_TO_TEXT);
 }
 
 /* 関数の定義 */
@@ -26,7 +24,6 @@ function randomRadio(){
 
     // ラジオボタンが存在するか確認
     if (radios.length === 0) {
-        console.log('性別のラジオボタンはありませんでした');
         return;
     }
 
@@ -47,9 +44,7 @@ function randomRadio(){
     // ランダムに1つ選択
     if(reqioredRadios.length > 0) {
         const randomIndex = Math.floor(Math.random() * reqioredRadios.length);
-        console.log(randomIndex);
         reqioredRadios[randomIndex].checked = true;
-        console.log(`"${reqioredRadios[randomIndex].value}" がランダムに選択されました。`);
     }
 
     return;
@@ -63,7 +58,6 @@ function randomDropdown(){
 
     // ドロップダウンメニューが存在するか確認
     if (dropdowns.length === 0) {
-        console.log('ドロップダウンメニューはありませんでした');
         return;
     }
 
@@ -79,7 +73,6 @@ function randomDropdown(){
         const options = dropdown.options;
         const randomIndex = Math.floor(Math.random() * options.length);
         dropdown.selectedIndex = randomIndex;
-        console.log(`"${options[randomIndex].text}" がランダムに選択されました。`);
     });
 
     return;
@@ -93,7 +86,6 @@ function fillTextInput(){
 
     // テキストインプットが存在するか確認
     if (textInputs.length === 0) {
-        console.log('性別のテキストインプットが見つかりませんでした。');
         return;
     }
 
@@ -107,7 +99,6 @@ function fillTextInput(){
     // テキストインプットに指定された値を設定
     requiredTextInputs.forEach(textInput => {
         textInput.value = VALUE_TO_TEXT;
-        console.log(`"${textInput.value}" が入力されました。`);
     });
 
     return;
@@ -203,7 +194,6 @@ function saveToStrage(dataToSave) {
 
         // ストレージに保存
         chrome.storage.local.set({ genderData: genderData }, function() {
-            console.log('Gender data has been saved:', dataToSave);
         });
     });
 }
