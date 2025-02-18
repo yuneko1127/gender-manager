@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "(開発中)性別マネージャー",
+    "name": "性別マネージャー",
     "version": "1.0",
     "description": "Web上にある性別に関する入力を勝手に入力する拡張機能です。",
     "permissions": ["storage"],
