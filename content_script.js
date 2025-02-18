@@ -1,7 +1,7 @@
 /* キーワードと規定入力を定義 */
 if (typeof window.KEY_WORDS === 'undefined') {
     // 探してほしい入力欄のキーワードを追加
-    window.KEY_WORDS = ["gender", "sex", "seibetsu", "seibetu"];
+    window.KEY_WORDS = ["gender", "sex", "seibetsu", "seibetu", "性別"];
 }
 if (typeof window.VALUE_TO_TEXT === 'undefined') {
     // テキストインプットのときに入力する値を定義
