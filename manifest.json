@@ -1,23 +1,18 @@
 {
     "manifest_version": 3,
-    "name": "性別マネージャー",
+    "name": "(開発中)性別マネージャー",
     "version": "1.0",
     "description": "Web上にある性別に関する入力を勝手に入力する拡張機能です。",
-    "permissions": ["tabs", "scripting", "storage"],
+    "permissions": ["storage"],
     "action": {
       "default_popup": "popup.html",
       "default_title": "保存データを確認"
     },
-    "background": {
-      "service_worker": "background.js"
-    },
     "content_scripts": [
       {
-        "matches": ["<all_urls>"],
-        "js": ["content_script.js"]
+        "matches": ["https://*/*", "http://*/*"],
+        "js": ["content_script.js"],
+        "run_at": "document_start"
       }
-    ],
-    "host_permissions": [
-      "<all_urls>"
     ]
 }

@@ -8,6 +8,17 @@ if (typeof window.VALUE_TO_TEXT === 'undefined') {
     window.VALUE_TO_TEXT = "無回答";
 }
 
+/* イベントリスナーの追加 */
+document.addEventListener("DOMContentLoaded", () => {
+    randomInputs();
+});
+
+document.addEventListener("submit", (event) => {
+    if (event.target && event.target.tagName === "FORM") {
+        saveFormData(event.target);
+    }
+}, true); 
+
 /* 関数の定義 */
 // ランダム入力を行う関数
 function randomInputs() {
@@ -104,15 +115,6 @@ function fillTextInput(){
     return;
 }
 
-// フォーム送信時のイベントを監視し、データ保存関数を呼び出す関数
-function addSubmitListener() {
-    document.addEventListener("submit", function(event) {
-        if (event.target && event.target.tagName === "FORM") {
-            saveFormData(event.target);  // フォーム送信時にデータを保存
-        }
-    }, true);
-}
-
 // 保存するデータを探し、保存関数を呼び出す関数
 function saveFormData(form) {
     let dataToSave = {
@@ -179,12 +181,12 @@ function saveFormData(form) {
     }
 
     if(radios.length > 0 || dropdowns.length > 0 || textInputs.length > 0) {
-        saveToStrage(dataToSave);
+        saveToStorage(dataToSave);
     }
 }
 
 // 実際にデータをストレージに保存する関数
-function saveToStrage(dataToSave) {
+function saveToStorage(dataToSave) {
     chrome.storage.local.get(['genderData'], function(result) {
         // 以前のデータを取得
         let genderData = result.genderData || [];
