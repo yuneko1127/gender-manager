@@ -38,24 +38,24 @@ function randomRadio(){
         return;
     }
 
-    const reqiredRadios = [];
+    const requiredRadios = [];
     radios.forEach(radio => {
         if (radio.required || radio.dataset.require === "true") {
-            reqiredRadios.push(radio);
+            requiredRadios.push(radio);
         }
     });
 
     // 選択されているボタンを解除
-    reqiredRadios.forEach(radio => {
+    requiredRadios.forEach(radio => {
         if (radio.checked) {
             radio.checked = false;
         }
     });
 
     // ランダムに1つ選択
-    if(reqiredRadios.length > 0) {
-        const randomIndex = Math.floor(Math.random() * reqiredRadios.length);
-        reqiredRadios[randomIndex].checked = true;
+    if(requiredRadios.length > 0) {
+        const randomIndex = Math.floor(Math.random() * requiredRadios.length);
+        requiredRadios[randomIndex].checked = true;
     }
 
     return;
