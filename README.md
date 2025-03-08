@@ -10,7 +10,8 @@ Chrome ウェブストアでも[性別マネージャー](https://chromewebstore
 「store」ブランチが現在Chrome ウェブストアに公開しているものと同じ機能のものです。
 
 ### 改変しないで使う
-1. このリポジトリをダウンロードする。一番手軽なのは**Download Zip**です。特定のブランチをダウンロードしたいときは、そこに移動してからDownload Zipをする。![DawnloadZip](src/downloadZip.png)
+1. このリポジトリをダウンロードする。一番手軽なのは**Download Zip**です。特定のブランチをダウンロードしたいときは、そこに移動してからDownload Zipをする。<br>
+![DawnloadZip](src/downloadZip.png)
 1. Chrome拡張機能のページ[chrome://extensions/](chrome://extensions/)にアクセス
 1. 左上のパッケージ化されていない拡張機能を読み込むから、フォルダを選択。
 
