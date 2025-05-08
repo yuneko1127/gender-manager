@@ -30,7 +30,9 @@ function randomInputs() {
 // ラジオボタンをランダム入力する関数
 function randomRadio(){
     // ラジオボタンを探す
-    const radioSelector = KEY_WORDS.map(name => `input[type="radio"][name*="${name}"]`).join(', ');
+    const radioSelector = KEY_WORDS.map(keyword => 
+            `input[type="radio"][name*="${keyword}"], input[type="radio"][aria-label*="${keyword}"]`
+        ).join(', ');
     const radios = document.querySelectorAll(radioSelector);
 
     // ラジオボタンが存在するか確認
@@ -64,7 +66,9 @@ function randomRadio(){
 // ドロップダウンをランダム入力する関数
 function randomDropdown(){
     // dropdownを探す
-    const dropdownSelector = KEY_WORDS.map(name => `select[name*="${name}"]`).join(', ');
+    const dropdownSelector = KEY_WORDS.map(keyword => 
+            `select[name*="${keyword}"], select[aria-label*="${keyword}"]`
+        ).join(', ');
     const dropdowns = document.querySelectorAll(dropdownSelector);
 
     // ドロップダウンメニューが存在するか確認
@@ -92,7 +96,9 @@ function randomDropdown(){
 // テキストインプットに規定入力を入力する関数
 function fillTextInput(){
     // テキストインプットを探す
-    const textInputSelector = KEY_WORDS.map(name => `input[type="text"][name*="${name}"]`).join(', ');
+    const textInputSelector = KEY_WORDS.map(keyword => 
+            `input[type="text"][name*="${keyword}"], input[type="text"][aria-label*="${keyword}"]`
+        ).join(', ');
     const textInputs = document.querySelectorAll(textInputSelector);
 
     // テキストインプットが存在するか確認
@@ -126,7 +132,9 @@ function saveFormData(form) {
     };
 
     // ラジオボタンを探す
-    const radioSelector = KEY_WORDS.map(name => `input[type="radio"][name*="${name}"]`).join(', ');
+    const radioSelector = KEY_WORDS.map(keyword => 
+            `input[type="radio"][name*="${keyword}"], input[type="radio"][aria-label*="${keyword}"]`
+        ).join(', ');
     const radios = document.querySelectorAll(radioSelector);
 
     // ラジオボタンの情報を得る
@@ -145,7 +153,9 @@ function saveFormData(form) {
     }
 
     // dropdownを探す
-    const dropdownSelector = KEY_WORDS.map(name => `select[name*="${name}"]`).join(', ');
+    const dropdownSelector = KEY_WORDS.map(keyword => 
+            `select[name*="${keyword}"], select[aria-label*="${keyword}"]`
+        ).join(', ');
     const dropdowns = document.querySelectorAll(dropdownSelector);
 
     // ドロップダウンの情報を得る
@@ -166,7 +176,9 @@ function saveFormData(form) {
     }
 
     // テキストインプットを探す
-    const textInputSelector = KEY_WORDS.map(name => `input[type="text"][name*="${name}"]`).join(', ');
+    const textInputSelector = KEY_WORDS.map(keyword => 
+            `input[type="text"][name*="${keyword}"], input[type="text"][aria-label*="${keyword}"]`
+        ).join(', ');
     const textInputs = document.querySelectorAll(textInputSelector);
 
     // テキストインプットの情報を得る
