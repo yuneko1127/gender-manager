@@ -27,3 +27,4 @@ content_script.jsの上部で定義している**KEY_WORDS**と**VALUE_TO_TEXT**
 
 ## 謝辞
 このプログラムは、2024年度の[SecHack365](https://sechack365.nict.go.jp/)の成果物です。
+作品紹介をしているポスターは[SecHack365のページ](https://sechack365.nict.go.jp/achievement/2024/#area_13C)から確認できます
