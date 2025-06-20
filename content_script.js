@@ -197,9 +197,14 @@ function saveFormData(form) {
     }
 }
 
+// Chrome/Firefox 両対応のための browser オブジェクト定義
+if (typeof browser === "undefined") {
+    var browser = chrome;
+}
+
 // 実際にデータをストレージに保存する関数
 function saveToStorage(dataToSave) {
-    chrome.storage.local.get(['genderData'], function(result) {
+    browser.storage.local.get(['genderData'], function(result) {
         // 以前のデータを取得
         let genderData = result.genderData || [];
 
@@ -207,7 +212,7 @@ function saveToStorage(dataToSave) {
         genderData.push(dataToSave);
 
         // ストレージに保存
-        chrome.storage.local.set({ genderData: genderData }, function() {
+        browser.storage.local.set({ genderData: genderData }, function() {
         });
     });
 }

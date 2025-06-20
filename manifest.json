@@ -14,5 +14,10 @@
         "js": ["content_script.js"],
         "run_at": "document_start"
       }
-    ]
-}
+    ],
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "gender-manager@example.com"
+      }
+    }
+  }
