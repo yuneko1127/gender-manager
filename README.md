@@ -1,13 +1,15 @@
 # 性別マネージャー
 
 性別マネージャーは、Web上にある性別に関する入力を支援する拡張機能です。
-Chrome ウェブストアでも[性別マネージャー](https://chromewebstore.google.com/detail/%E6%80%A7%E5%88%A5%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC/kofifkdfnmaaolbcpijnmpihdboaeejm)で公開しています。
+Chrome ウェブストアでも[性別マネージャー](https://chromewebstore.google.com/detail/%E6%80%A7%E5%88%A5%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC/kofifkdfnmaaolbcpijnmpihdboaeejm)で公開しています。<br>
+Mozilla Add-onとしても公開されました。[gender-maneger](https://addons.mozilla.org/ja/firefox/addon/gender-maneger/)から利用できます。
 
 ## 使い方
-もっとも手軽な方法は、Chrome ウェブストアに公開されている[性別マネージャー](https://chromewebstore.google.com/detail/%E6%80%A7%E5%88%A5%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC/kofifkdfnmaaolbcpijnmpihdboaeejm)を追加する方法です。
+もっとも手軽な方法は、Chrome ウェブストアに公開されている[性別マネージャー](https://chromewebstore.google.com/detail/%E6%80%A7%E5%88%A5%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC/kofifkdfnmaaolbcpijnmpihdboaeejm)、Mozilla Add-onと指定公開されている[gender-maneger](https://addons.mozilla.org/ja/firefox/addon/gender-maneger/)を追加する方法です。
 
-これ以降は、Webストアへ更新されていない機能を利用したいときの手順です。
+これ以降は、Webストアへ更新されていない機能などを利用したいときの手順です。
 「store」ブランチが現在Chrome ウェブストアに公開しているものと同じ機能のものです。
+「firefox」ブランチが現在Mozilla Add-onとして公開しているものと同じ機能のものです。
 
 ### 改変しないで使う
 1. このリポジトリをダウンロードする。一番手軽なのは**Download Zip**です。特定のブランチをダウンロードしたいときは、そこに移動してからDownload Zipをする。<br>
