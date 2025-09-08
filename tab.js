@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // 取得したデータをコンソールに出力
         if (chrome.runtime.lastError) {
             console.error("Error:", chrome.runtime.lastError);
-            dataOutput.innerHTML = "<tr><td colspan='3'>データの取得に失敗しました。</td></tr>";
+            dataOutput.innerHTML = "<tr><td colspan='4'>データの取得に失敗しました。</td></tr>";
         } else {
             let dataCount = 0;
             if (result.genderData && result.genderData.length > 0) {
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // データ削除ボタンのイベントリスナー
     clearButton.addEventListener("click", function () {
         chrome.storage.local.remove(["genderData"], function () {
-            dataOutput.innerHTML = "<tr><td colspan='3'>データが削除されました。</td></tr>";
+            dataOutput.innerHTML = "<tr><td colspan='4'>データが削除されました。</td></tr>";
         });
     });
 });
