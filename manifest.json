@@ -8,6 +8,12 @@
       "default_popup": "popup.html",
       "default_title": "保存データを確認"
     },
+    "web_accessible_resources": [
+      {
+        "resources": ["tab.html", "tab.js"],
+        "matches": ["<all_urls>"]
+      }
+    ],
     "content_scripts": [
       {
         "matches": ["https://*/*", "http://*/*"],
