@@ -13,25 +13,34 @@ document.addEventListener("DOMContentLoaded", function () {
             let dataCount = 0;
             if (result.genderData && result.genderData.length > 0) {
                 dataCount = result.genderData.length;
-                // テーブルの行を動的に作成
-                let rows = "";
+                // テーブルの行を動的に生成（innerHTMLを使わない）
+                dataOutput.innerHTML = "";
                 result.genderData.forEach((data, idx) => {
                     let selectedValue = data.selectedValue || "未選択";
                     let type = data.radios ? "ラジオボタン" :
                         data.dropdowns ? "ドロップダウン" :
                             data.textInputs ? "テキストインプット" : "不明";
 
-                    rows += `
-                        <tr>
-                            <td>${data.url}</td>
-                            <td>${type}</td>
-                            <td>${selectedValue}</td>
-                            <td><button class="deleteRow" data-idx="${idx}">削除</button></td>
-                        </tr>
-                    `;
-                });
-                dataOutput.innerHTML = rows;
+                    const tr = document.createElement('tr');
+                    const tdUrl = document.createElement('td');
+                    tdUrl.textContent = data.url;
+                    const tdType = document.createElement('td');
+                    tdType.textContent = type;
+                    const tdValue = document.createElement('td');
+                    tdValue.textContent = selectedValue;
+                    const tdOp = document.createElement('td');
+                    const delBtn = document.createElement('button');
+                    delBtn.textContent = '削除';
+                    delBtn.className = 'deleteRow';
+                    delBtn.setAttribute('data-idx', idx);
+                    tdOp.appendChild(delBtn);
 
+                    tr.appendChild(tdUrl);
+                    tr.appendChild(tdType);
+                    tr.appendChild(tdValue);
+                    tr.appendChild(tdOp);
+                    dataOutput.appendChild(tr);
+                });
                 // 削除ボタンのイベントリスナーを追加
                 document.querySelectorAll('.deleteRow').forEach(btn => {
                     btn.addEventListener('click', function () {
@@ -48,7 +57,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                 });
             } else {
-                dataOutput.innerHTML = "<tr><td colspan='4'>データがありません。</td></tr>";
+                // データがない場合もinnerHTMLを最小限に
+                dataOutput.innerHTML = "";
+                const tr = document.createElement('tr');
+                const td = document.createElement('td');
+                td.colSpan = 4;
+                td.textContent = 'データがありません。';
+                tr.appendChild(td);
+                dataOutput.appendChild(tr);
             }
             dataCountElement.textContent = `出会った性別欄の数: ${dataCount}`;
         }
